@@ -1,8 +1,5 @@
 # 019 - KubeRay for Distributed Training
 
-## Hook
-Training a model on one GPU takes forever. What if you could use 100 GPUs at once?
-
 ## Script
 
 Training a model on one GPU takes forever. What if you could use 100 GPUs at once?

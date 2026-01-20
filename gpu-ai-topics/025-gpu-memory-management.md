@@ -1,8 +1,5 @@
 # 025 - GPU Memory Management
 
-## Hook
-Your GPU training job crashed with OOM. But you requested 80GB of GPU memory. What happened?
-
 ## Script
 
 Your GPU training job crashed with OOM. But you requested 80GB of GPU memory. What happened?

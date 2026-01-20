@@ -1,8 +1,5 @@
 # 016 - Inference Autoscaling
 
-## Hook
-Scaling web apps is easy. Scaling GPU inference servers? That's a different game.
-
 ## Script
 
 Scaling web apps is easy. Scaling GPU inference servers? That's a different game.

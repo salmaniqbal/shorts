@@ -1,8 +1,5 @@
 # 021 - Spot Nodes for ML Training
 
-## Hook
-GPU nodes are expensive. What if you could get them for 70% off?
-
 ## Script
 
 GPU nodes are expensive. What if you could get them for 70% off?

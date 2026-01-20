@@ -1,8 +1,5 @@
 # 022 - Node Feature Discovery
 
-## Hook
-How does Kubernetes know which nodes have GPUs, AVX-512, or NVMe drives? It doesn't, unless you install NFD.
-
 ## Script
 
 How does Kubernetes know which nodes have GPUs, AVX-512, or NVMe drives? It doesn't, unless you install NFD.

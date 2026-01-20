@@ -1,8 +1,5 @@
 # 012 - NVIDIA GPU Operator
 
-## Hook
-Setting up GPUs in Kubernetes used to be a nightmare. Now it's one YAML file.
-
 ## Script
 
 Setting up GPUs in Kubernetes used to be a nightmare. Now it's one YAML file.

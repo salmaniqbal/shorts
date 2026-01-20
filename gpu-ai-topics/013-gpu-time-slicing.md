@@ -1,8 +1,5 @@
 # 013 - GPU Time-Slicing
 
-## Hook
-What if I told you multiple pods CAN share a single GPU?
-
 ## Script
 
 What if I told you multiple pods CAN share a single GPU?

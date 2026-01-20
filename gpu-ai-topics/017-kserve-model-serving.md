@@ -1,8 +1,5 @@
 # 017 - KServe for Model Serving
 
-## Hook
-Deploying one ML model is easy. Deploying hundreds with canary releases and autoscaling? You need KServe.
-
 ## Script
 
 Deploying one ML model is easy. Deploying hundreds with canary releases and autoscaling? You need KServe.

@@ -1,8 +1,5 @@
 # 011 - GPU Scheduling in Kubernetes
 
-## Hook
-Did you know that GPUs in Kubernetes don't work like CPUs at all?
-
 ## Script
 
 Did you know that GPUs in Kubernetes don't work like CPUs at all?

@@ -1,8 +1,5 @@
 # 023 - Topology-Aware Scheduling
 
-## Hook
-Not all GPUs are created equal. Two GPUs on the same NVLink are 10x faster than two across PCIe.
-
 ## Script
 
 Not all GPUs are created equal. Two GPUs on the same NVLink are 10x faster than two across PCIe.

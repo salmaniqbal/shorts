@@ -1,8 +1,5 @@
 # 018 - vLLM on Kubernetes
 
-## Hook
-Running LLMs is expensive. vLLM makes them 24x faster. Here's how to run it on Kubernetes.
-
 ## Script
 
 Running LLMs is expensive. vLLM makes them 24x faster. Here's how to run it on Kubernetes.

@@ -1,8 +1,5 @@
 # 020 - DRA (Dynamic Resource Allocation)
 
-## Hook
-The device plugin API is showing its age. DRA is the future of GPU scheduling in Kubernetes.
-
 ## Script
 
 The device plugin API is showing its age. DRA is the future of GPU scheduling in Kubernetes.

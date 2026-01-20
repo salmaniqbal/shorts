@@ -1,8 +1,5 @@
 # 024 - Running Local LLMs on Kubernetes
 
-## Hook
-You don't need OpenAI to run LLMs. Deploy Ollama on Kubernetes and keep your data private.
-
 ## Script
 
 You don't need OpenAI to run LLMs. Deploy Ollama on Kubernetes and keep your data private.

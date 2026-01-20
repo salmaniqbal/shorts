@@ -1,8 +1,5 @@
 # 014 - MIG (Multi-Instance GPU)
 
-## Hook
-Time-slicing shares GPUs, but MIG actually splits them. Here's the difference.
-
 ## Script
 
 Time-slicing shares GPUs, but MIG actually splits them. Here's the difference.

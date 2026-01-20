@@ -1,8 +1,5 @@
 # 015 - Kueue for AI Workloads
 
-## Hook
-What happens when 50 data scientists submit training jobs at the same time? Chaos, unless you have Kueue.
-
 ## Script
 
 What happens when 50 data scientists submit training jobs at the same time? Chaos, unless you have Kueue.

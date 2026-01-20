@@ -1,8 +1,5 @@
 # 026 - K8sGPT for Cluster Debugging
 
-## Hook
-Your cluster is broken. Instead of reading logs for an hour, just ask AI what's wrong.
-
 ## Script
 
 Your cluster is broken. Instead of reading logs for an hour, just ask AI what's wrong.
