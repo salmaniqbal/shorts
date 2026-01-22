@@ -18,7 +18,7 @@ resources:
     nvidia.com/gpu: 1
 ```
 
-The scheduler finds a node with a free GPU and assigns your pod there.
+The scheduler finds a node with a free GPU and assigns your pod there. (“This pod gets exclusive access to this device, because that’s the only sane default.” “GPUs are not naturally time-shareable like CPUs, so Kubernetes treats them as exclusive devices rather than schedulable time-based resources.”)
 
 But here's the catch: you can't request half a GPU. And once a pod claims a GPU, no one else can use it, even if your workload only uses 10% of it.
 
