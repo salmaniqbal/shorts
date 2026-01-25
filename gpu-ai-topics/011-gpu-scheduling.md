@@ -4,13 +4,13 @@
 
 Did you know that GPUs in Kubernetes don't work like CPUs at all?
 
-When you request CPU, Kubernetes can slice it up. Half a core here, quarter of a core there. Easy.
+When it comes to CPU a pod can request portions of CPU and Kubernetes can slice it up. Half a core here, quarter of a core there. Easy.
 
-But GPUs? They're all or nothing.
+But for GPUs, you either get the whole GPU or nothing. This is because the archietcture of the GPU is different than that of a CPU. CPUs can juggle tasks, GPUs do one massive job
 
-To use a GPU in Kubernetes, you need the NVIDIA device plugin running on your nodes. It discovers GPUs and tells Kubernetes "hey, this node has 4 GPUs available."
+To use a GPU in Kubernetes, you need the NVIDIA device plugin running on your nodes. It discovers GPUs and tells Kubernetes "hey, these nodes have 2 GPUs available."
 
-Then in your pod spec, you request a GPU like this:
+In order to use a GPU in your pod, you request it like this:
 
 ```yaml
 resources:
@@ -18,14 +18,12 @@ resources:
     nvidia.com/gpu: 1
 ```
 
-The scheduler finds a node with a free GPU and assigns your pod there. (“This pod gets exclusive access to this device, because that’s the only sane default.” “GPUs are not naturally time-shareable like CPUs, so Kubernetes treats them as exclusive devices rather than schedulable time-based resources.”)
+Then the scheduler finds a node with a free GPU and assigns your pod there. No one else can use that GPU even if your workload only uses 10% of it.
 
-But here's the catch: you can't request half a GPU. And once a pod claims a GPU, no one else can use it, even if your workload only uses 10% of it.
-
-So remember: CPUs share nicely, GPUs don't. Plan your GPU workloads accordingly.
+So remember: CPUs share nicely, GPUs don't.
 
 ## Visuals & Animations
-
+ 
 | Timestamp | Visual |
 |-----------|--------|
 | "GPUs don't work like CPUs" | Split screen: CPU shown as a pie being sliced into pieces vs GPU as a solid block that can't be cut |
