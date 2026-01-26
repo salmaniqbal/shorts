@@ -2,17 +2,20 @@
 
 ## Script
 
-Setting up GPUs in Kubernetes used to be a nightmare. Now it's one YAML file.
+Setting up GPUs in Kubernetes used to be a nightmare. Now it is basically one install.
 
 Before the GPU Operator, you had to manually install NVIDIA drivers on every node, set up the container toolkit, deploy the device plugin, and pray nothing broke on the next kernel update.
 
 The NVIDIA GPU Operator automates all of this.
 
-It's a Kubernetes Operator that watches your nodes and automatically installs everything needed to run GPU workloads.
+It is a Kubernetes Operator that watches your nodes and automatically installs everything needed to run GPU workloads.
 
-Drivers? Installed as a container. Container toolkit? Deployed. Device plugin? Running. Even monitoring with DCGM is set up for you.
+Drivers? Installed via a container.
+Container toolkit? Deployed.
+Device plugin? Running.
+Even monitoring with DCGM is set up for you.
 
-When you add a new GPU node, the operator detects it and configures it automatically. No SSH, no scripts, no manual work.
+Add a new GPU node, and the operator detects it and configures it automatically. No SSH, no scripts, no manual work.
 
 Install it with Helm, and your cluster is GPU-ready in minutes.
 
