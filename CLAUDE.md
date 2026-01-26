@@ -16,6 +16,7 @@ This repository contains scripts for YouTube Shorts explaining Kubernetes concep
 - Uses analogies and metaphors to make concepts stick
 - Light humor where appropriate (memes, unexpected examples)
 - Practical focus - what does this mean for the listener?
+- Use British english for the script
 
 ### Timing
 - Target: 30-45 seconds
