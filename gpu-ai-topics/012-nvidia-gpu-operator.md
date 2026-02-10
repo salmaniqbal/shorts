@@ -8,18 +8,16 @@ Before the GPU Operator, you had to manually install NVIDIA drivers on every nod
 
 The NVIDIA GPU Operator automates all of this.
 
-It is a Kubernetes Operator that watches your nodes and automatically installs everything needed to run GPU workloads.
+This operator is a special pod that runs in the cluster and watches nodes to automatically install everything needed to run GPU workloads.
 
-Drivers? Installed via a container.
+Drivers? Installed.
 Container toolkit? Deployed.
 Device plugin? Running.
 Even monitoring with DCGM is set up for you.
 
-Add a new GPU node, and the operator detects it and configures it automatically. No SSH, no scripts, no manual work.
+Add a new GPU node and the operator detects it and configures it automatically. No SSH, no scripts, no manual work.
 
 Install it with Helm, and your cluster is GPU-ready in minutes.
-
-So if you're running AI workloads on Kubernetes, the GPU Operator is your best friend.
 
 ## Visuals & Animations
 

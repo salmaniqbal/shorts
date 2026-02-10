@@ -2,21 +2,31 @@
 
 ## Script
 
-What if I told you multiple pods CAN share a single GPU?
+When a kubernetes pod gets scheduled on a GPU, it gets exclusive access to it even if it uses it partially.
 
-By default, Kubernetes gives each pod exclusive access to a GPU. Great for isolation, terrible for utilization.
+Any other pod requesting a GPU must wait until the first one finishes
 
-Enter GPU time-slicing.
+This is great for isolation but terrible for utilisation. 
 
-With time-slicing, NVIDIA lets you configure how many pods can share a single GPU. The GPU rapidly switches between workloads, giving each one a slice of time.
+Enter GPU time slicing
 
-You configure it with a ConfigMap that tells the device plugin "advertise 4 GPUs instead of 1" even though there's only one physical GPU.
+With time-slicing, NVIDIA allows multiple pods to share a single physical GPU. The GPU rapidly switches between workloads, giving each pod a slice of execution time.
 
-Now 4 pods can each request `nvidia.com/gpu: 1` and share that single card.
+It is configured with a ConfigMap that tells the device plugin to advertise multiple GPUs even though only one physical GPU exists
 
-But here's the tradeoff: there's no memory isolation. If one pod goes crazy and eats all the GPU memory, everyone crashes.
+Now 3 pods can each request a GPU each `nvidia.com/gpu: 1` and share that single card.
 
-Time-slicing works great for inference workloads and development. For production training jobs that need guaranteed resources? Stick with dedicated GPUs or use MIG.
+The trade-off: there is no memory isolation. If one pod consumes all GPU memory, it can cause failures for the others.
+
+
+
+
+## Notes: 
+Once a kernel begins, it runs to completion.
+The Linux kernel cannot interrupt it, cannot time-slice it, and cannot enforce
+fairness across tenants.
+This means that when two tenants share a GPU, one can invisibly consume
+memory, launch long-running kernels, and starve the other.
 
 ## Visuals & Animations
 
