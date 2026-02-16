@@ -2,21 +2,29 @@
 
 ## Script
 
-Time-slicing shares GPUs, but MIG actually splits them. Here's the difference.
 
-MIG stands for Multi-Instance GPU, and it's only available on NVIDIA A100 and H100 cards.
+Roses are red 
+Violets are blue 
+If you want real isolation, use Multi-Instance GPU
 
-Instead of software sharing like time-slicing, MIG physically partitions the GPU into smaller, isolated instances.
+In Kubernetes multiple pods can share a GPU by time slicing.
 
-An A100 with 80GB of memory can be split into up to 7 separate GPU instances. Each instance gets its own dedicated memory, compute cores, and cache.
+Multi-Instance GPU, actually splits the GPU. 
 
-The key difference? Complete isolation. If one workload crashes or goes rogue, the others keep running. No memory conflicts, no noisy neighbors.
+This is available on NVIDIA datacenter cards like A100 and H100.
 
-In Kubernetes, each MIG instance appears as a separate GPU resource. You can request a specific slice size like `nvidia.com/mig-3g.20gb` for a 3-slice instance with 20GB memory.
+Take a 40GB A100. Under the hood, it is a single pool of compute & memory. 
 
-MIG is perfect for inference workloads where you need isolation but don't need a full GPU.
+With MIG enabled, you can split a single GPU up to seven isolated instances. Each with dedicated compute and its own slice of GPU memory
 
-The tradeoff? Less flexibility than time-slicing, and you need expensive A100 or H100 hardware.
+You can also mix different profiles depending on your workload.
+
+In Kubernetes, each slice appears as its own resource, and can be requested by adding this in the requests nvidia.com/mig-3g.20gb. And can be requested like this
+
+Unlike time-slicing, this is true hardware isolation — no noisy neighbours. If one workload crashes, the others keep running.
+
+MIG is perfect for inference when you want isolation without burning a full GPU.
+
 
 ## Visuals & Animations
 
