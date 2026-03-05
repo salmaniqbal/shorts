@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ollama
+  namespace: llm
+  annotations:
+    # Ollama can stream responses; this helps avoid buffering issues.
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    # Long-running generations can take time.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    # Optional: allow larger payloads (prompts, embeddings, etc.)
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ollama
+                port:
+                  number: 80

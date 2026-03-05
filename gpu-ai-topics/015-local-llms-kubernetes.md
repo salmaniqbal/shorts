@@ -2,23 +2,27 @@
 
 ## Script
 
-You don't need OpenAI to run LLMs. Deploy Ollama on Kubernetes and keep your data private.
+What if you could run powerful AI
+without sending your data anywhere?
 
-Ollama is a tool for running open-source LLMs locally. Llama, Mistral, Phi, and many more.
+You don’t need OpenAI or Anthropic to run LLMs for you.
 
-Running it on Kubernetes means your AI stays in your infrastructure. No data leaves your cluster.
+Deploy Ollama on Kubernetes and keep everything inside your cluster.
 
-The deployment is simple. Run Ollama as a deployment with GPU resources, expose it with a service, done.
+Ollama lets you run open-source models like Llama, Mistral and Phi locally. No external API calls. No data leaving your infrastructure.
 
-For model storage, use a PersistentVolume. Models are downloaded once and reused, saving bandwidth and startup time.
+In Kubernetes, it’s simple:
+Run Ollama as a Deployment with GPU resources, expose it with a Service, and mount a PersistentVolume so models download once and persist.
 
-Ollama exposes an API compatible with many LLM libraries. Point your apps at your internal service instead of external APIs.
+It exposes a standard API, so your apps just point to an internal service instead of the internet.
 
-For multiple models, run different Ollama instances or use model multiplexing. Some teams run a model router that forwards requests to the right backend.
+Need multiple models?
+Run separate Ollama instances or add a lightweight model router.
 
-Pair it with an ingress for team access, add resource quotas so one team doesn't hog the GPU, and you've got a private LLM platform.
+Add an Ingress for internal access, set resource quotas to protect your GPUs, and you’ve built a private LLM platform.
 
-Privacy-first AI on Kubernetes. Your data, your models, your control.
+Privacy-first AI.
+Your data. Your models. Your control.
 
 ## Visuals & Animations
 

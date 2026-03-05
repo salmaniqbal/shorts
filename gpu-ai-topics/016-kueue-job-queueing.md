@@ -2,7 +2,7 @@
 
 ## Script
 
-What happens when 50 data scientists submit training jobs at the same time? Chaos, unless you have Kueue.
+What happens when 50 data scientists submit training jobs at the same time? Chaos, unless you have Kueue. Queue but with a K.
 
 Kubernetes wasn't built for batch AI workloads. Jobs fight for GPUs, there's no fair sharing, and cluster costs spiral out of control.
 
