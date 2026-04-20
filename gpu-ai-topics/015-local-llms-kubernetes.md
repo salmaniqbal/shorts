@@ -1,6 +1,6 @@
-# 024 - Running Local LLMs on Kubernetes
+# 015 - Running Local LLMs on Kubernetes
 
-## Script
+## Script (Solo version)
 
 What if you could run powerful AI
 without sending your data anywhere?
@@ -23,6 +23,38 @@ Add an Ingress for internal access, set resource quotas to protect your GPUs, an
 
 Privacy-first AI.
 Your data. Your models. Your control.
+
+---
+
+## Script (Option 2 - Dialogue/Debate format with Salaboy)
+
+**Salman**: What if you could run AI without sending your data anywhere?
+
+**Salaboy**: That’s exactly what we do — Ollama on Kubernetes. Open-source models like Llama, Mistral, and Phi, running inside your own cluster. No external API calls. No data leaving your infrastructure.
+
+**Salman**: But isn’t it complex to set up?
+
+**Salaboy**: Not really. It’s just a Deployment with GPU resources, a Service to expose it, and a PersistentVolume so models download once and persist. Ollama exposes a standard API — your apps just point to an internal service instead of the internet.
+
+**Salman**: And if you need multiple models?
+
+**Salaboy**: Run separate Ollama instances or add a lightweight model router. Throw in an Ingress for internal access, set resource quotas to protect your GPUs — and you’ve got a private LLM platform.
+
+**Salman**: Your data. Your models. Your control.
+
+---
+
+## Script (Option 3 - Intro + Deep Dive with Salaboy)
+
+**Salman**: I brought in my friend Salaboy — he literally wrote the book on Platform engineering. Salaboy, how do you run private AI without sending data to OpenAI?
+
+**Salaboy**: Deploy Ollama on Kubernetes. It runs open-source models like Llama, Mistral, and Phi — locally, inside your cluster. No external API calls. No data leaving your infrastructure.
+
+In Kubernetes, it’s straightforward: a Deployment with GPU resources, a Service to expose it, and a PersistentVolume so models download once and persist. Ollama exposes a standard API, so your apps just point to an internal service instead of the internet.
+
+Need multiple models? Run separate Ollama instances or add a model router. Add an Ingress for internal access, set resource quotas to protect your GPUs — and you’ve built a private LLM platform.
+
+**Salman**: Privacy-first AI. Follow Salaboy on X @salaboy.
 
 ## Visuals & Animations
 
