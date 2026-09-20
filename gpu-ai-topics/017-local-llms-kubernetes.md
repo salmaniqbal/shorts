@@ -2,6 +2,13 @@
 
 ## Script (Solo version)
 
+
+You can run LLM models on your infrastructure 
+And none of your prompts will leave your estate 
+Here’s my friend Salaboy who will show you how
+
+---
+
 What if you could run powerful AI
 without sending your data anywhere?
 

@@ -2,23 +2,42 @@
 
 ## Script
 
-Your ML training job runs for 12 hours, then crashes. The GPU overheated. You had no idea because you weren't monitoring it.
+[FACE]
+Your AI training job runs for 12 hours on Kubernetes, then suddenly crashes.
 
-This is why you need DCGM Exporter.
+The GPU had been overheating for hours, but nobody noticed because there was no monitoring.
 
-DCGM stands for Data Centre GPU Manager. It's NVIDIA's tool for monitoring GPU health and performance. The exporter turns those metrics into Prometheus format so you can visualise them in Grafana.
+This is why you need DCGM, NVIDIA's Data Center GPU Manager.
 
-What metrics do you get? Temperature, power usage, memory utilisation, GPU utilisation, fan speed, and ECC errors. You can even see SM clock speeds and PCIe throughput.
+On Kubernetes, the NVIDIA GPU Operator installs the GPU drivers, DCGM, and DCGM Exporter.
 
-Why does this matter?
+DCGM collects GPU health and performance metrics, and the exporter makes them available to Prometheus and Grafana.
 
-Temperature spikes cause thermal throttling. Your training slows down and you don't know why. Memory utilisation creeping up? You're about to hit an out-of-memory error. ECC errors increasing? Your GPU might be failing.
+[FACE]
+So, what metrics do you get?
 
-Deploy DCGM Exporter as a DaemonSet so it runs on every GPU node. Point Prometheus at it and set up alerts.
+GPU utilisation, memory usage, temperature, power draw, fan speed, ECC errors, clock speeds, and PCIe throughput.
 
-GPU memory above 90%? Alert. Temperature above 80 degrees? Alert. ECC errors detected? Definitely alert.
+[FACE]
+So, Why does this matter?
 
-Don't let your next training job fail silently. Monitor your GPUs like your models depend on it, because they do.
+Temperature spikes can cause thermal throttling which can slow down training jobs.
+
+Memory usage climbing? You could be heading towards an out-of-memory error.
+
+ECC errors increasing? Your GPU hardware might be developing problems.
+
+Once those metrics are flowing into Prometheus, you can start setting up alerts.
+
+GPU memory above 90%? Alert.
+
+Temperature above 80 degrees? Alert.
+
+ECC errors detected? Definitely alert.
+
+[FACE]
+Don't let training jobs fail silently. Monitor your GPUs like your models depend on them—because they do.
+
 
 ## Visuals & Animations
 

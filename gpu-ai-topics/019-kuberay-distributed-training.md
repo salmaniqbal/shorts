@@ -2,7 +2,7 @@
 
 ## Script
 
-Training a model on one GPU takes forever. What if you could use 100 GPUs at once?
+Training an AI model can take weeks. What if you could finish in hours?
 
 Ray is a framework for distributed computing, and KubeRay brings it to Kubernetes.
 
