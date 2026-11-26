@@ -4,49 +4,48 @@ _Campaign: Data centers. Blog: https://goteleport.com/blog/third-party-access/. 
 
 ## Script
 
-Your vendor left in March. Their SSH key didn't.
+A switch in your data centre fails, and the vendor needs to fix it tonight.
 
-SSH keys don't expire on their own. The job ends, the access doesn't.
+So you send them an SSH key, or a VPN login for access. The switch gets fixed.
 
-And the VPN you gave them? It reaches the whole network segment, not just one switch. Your logs show a tunnel. Not who used it, or what they touched.
+But SSH keys don't expire. Six months later, that key still works.
 
-Cloud has identity built in. Your data centre doesn't.
+The VPN opens up a whole section of your network, not just that one switch. And your logs show a tunnel opened. Not who was on the other end, or what they touched.
 
-Teleport brings that model on-prem. The vendor requests access, and you approve it. They sign in through their own SSO, so there's no internal account to create, and they get a short-lived certificate instead of an SSH key.
 
-It's scoped to the switches they maintain. Nothing else even shows up.
+[Speak to camera]
+Teleport gives your data centre the identity-based access you expect in the cloud.
 
-Every session is recorded at kernel level against a named person, including what their scripts did underneath.
+The vendor signs in with their own company login, so there's no account to create. They request access, and you approve it.
 
-When the job's done, the access expires. Nothing to clean up.
+They get a short-lived certificate for that one switch, for a set time. Nothing else even shows up.
 
-## Notes
-- The core line from the blog: "Cloud has native identity. On-premises infrastructure does not."
-- The full flow in the blog is just-in-time: start from zero standing privileges, the vendor requests access, it passes an approval step, and it expires at the end of a set time or when the resource changes state.
-- Vendors use their own identity provider (Okta, Entra ID, Google Workspace, GitHub and others), so you don't create internal accounts for them. SCIM updates access when vendor staff join, move or leave.
-- Labels decide what each vendor sees. The blog's example: a GPU vendor sees only nodes in a diagnostic state, and a network vendor sees only the switches they maintain.
-- Stat for a pinned comment or caption, from Teleport's 2026 Infrastructure Identity Survey: 67% of organisations rely heavily on static credentials, and they report a 67% incident rate against 47% for those with low reliance. It's Teleport's own survey, so credit it on screen if used.
-- GoTo is the named customer in the blog: vendor and contractor access is "automatically revoked, fully observable, and centrally auditable".
+Every session and command is recorded against a named person.
+
+When the job's done, access expires on its own. Check out the blog to see how Teleport can implement this for your data centre.
+
 
 ## Visuals & Animations
 
 | Timestamp | Visual |
 |-----------|--------|
-| "Your vendor left in March" | Vendor's van driving away from a data centre, "MARCH" on a calendar |
-| "Their SSH key didn't" | A glowing key still sitting in the server door lock. Calendar pages flip past |
-| "don't expire on their own" | `authorized_keys` file, one line highlighted, "Expires: never" |
-| "The job ends, the access doesn't" | Ticket stamped CLOSED, key still glowing behind it |
-| "the whole network segment, not just one switch" | Map of a rack room. Vendor needs one switch, but the whole floor lights up |
-| "Not who used it, or what they touched" | VPN log: `tunnel up 09:14`, `tunnel down 17:02`, with question marks over everything in between |
-| "Cloud has identity built in" | Split screen. Cloud side: every action has a name badge |
-| "Your data centre doesn't" | Data centre side: the same actions with blank badges |
-| "requests access, and you approve it" | Access request in Slack: "switch-14, 2 hours", with an Approve button being clicked |
-| "their own SSO" | Vendor's own login page, then a certificate card appears with a name on it |
-| "short-lived certificate" | Certificate with a countdown timer |
-| "scoped to the switches they maintain" | The floor map again. Everything goes dark except two switches |
-| "Nothing else even shows up" | Vendor's view of the inventory: two switches listed, everything else gone |
-| "recorded at kernel level" | Session timeline with a named badge. `deploy.sh` expands to show the child processes underneath |
-| "the access expires" | Timer hits zero, certificate fades out, the door locks itself |
+| "A switch in your data centre fails" | Rack room, one switch blinking red |
+| "the vendor needs to fix it tonight" | Phone call to the vendor, clock reading 22:00 |
+| "you send them an SSH key, or a VPN login" | A key and a VPN password slide across into an email to the vendor |
+| "The switch gets fixed" | Switch light turns green. Ticket stamped CLOSED |
+| "SSH keys don't expire" | `authorized_keys` file, one line highlighted, "Expires: never" |
+| "Six months later, that key still works" | Calendar pages flip past. The key is still glowing in the server door lock |
+| "a whole section of your network, not just that one switch" | Map of the rack room. Vendor needs one switch, but the whole floor lights up |
+| "your logs show a tunnel opened" | VPN log: `tunnel up 22:04`, `tunnel down 23:51` |
+| "Not who was on the other end, or what they touched" | Question marks over everything between the two log lines |
+| "identity-based access you'd expect in the cloud" | Split screen. Cloud side: every action has a name badge. Data centre side: blank badges, which then fill in with names |
+| "their own company login" | Vendor's own sign-in page, with their company logo |
+| "no account to create" | An empty "new user" form fades away |
+| "They request access, and you approve it" | Access request in Slack: "switch-14, 2 hours", with an Approve button being clicked |
+| "short-lived certificate for that one switch, for a set time" | Certificate card with the vendor's name, `switch-14` and a countdown timer |
+| "Nothing else even shows up" | Vendor's view of the inventory: one switch listed, everything else gone |
+| "recorded against a named person" | Session timeline with the vendor's name badge, commands scrolling past |
+| "access expires on its own" | Timer hits zero, certificate fades out, the door locks itself |
 | "Nothing to clean up" | The empty lock, no key in it |
 | End card | Teleport logo + goteleport.com/use-cases/data-centers |
 

@@ -4,19 +4,22 @@ _Campaign: AI builders. Blog: https://goteleport.com/blog/complicating-mcp-enter
 
 ## Script
 
-Your agent connected to one MCP server. It just got 20 tools.
+One MCP server can expose 20 tools. OAuth may let the agent connect without restricting which individual tools it can call.
 
-OAuth scopes authorise access to the server, not to each tool inside it.
+And OAuth consent assumes a person chooses what to approve. With MCP, an LLM may request additional scopes at runtime. So who can set the limit?
 
-And OAuth assumes a human reads a consent screen. With MCP, an LLM decides which scopes it needs at runtime.
+[Face]
+The fix is to put policy in front of the server with something like Teleport.
 
-So don't let the model decide. Put the policy in front of the server.
+Teleport’s agent authenticates with workload identity and gets short-lived certificates, with no shared secrets. The client connects through Teleport, so it doesn’t negotiate OAuth directly with the MCP server.
 
-Teleport sits in front of your MCP servers as a proxy, so your client never negotiates OAuth with the server at all. Agents get short-lived certificates, with no shared secrets.
+Access starts denied. Roles control which servers users can reach and which tools they can call. If the model requests to post a slack message without permission, Teleport blocks it.
 
-New servers start with nothing callable. Allow read tools, and your agent can read. If the model asks for `slack_post_message`, it's denied unless a role says yes. The decision rests on identity, not on what the model asks for.
+Every call is logged with the identity, tool and access decision.
 
-And every call is logged: who, which tool, and the decision.
+[Face]
+The model can ask whatever it wants but your policy decides what actually happens. Check out Teleport's blog for details.
+
 
 ## Notes
 - The blog's exact lines: "OAuth scopes authorize access to the MCP server, not to individual tools within it." and "In an enterprise with MCP servers exposing 20+ tools, this is way too coarse."

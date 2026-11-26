@@ -4,21 +4,20 @@ _Campaign: Digital payments and banking. Blog: https://goteleport.com/blog/pci-d
 
 ## Script
 
-An admin just reached your production database. Who approved that?
+An admin just accessed your payment production database. Who approved it?
 
-You've got the log. For PCI DSS 4.0, that's not enough.
+You’ve got the log. But PCI DSS 4.0 asks for the full trail: why access was elevated, who approved it, and who reviewed the activity.
 
-Assessors want the chain. Why did they elevate? Who approved it? Did anyone review it afterwards? What changed?
+And it’s not just people. Interactive service accounts need a documented reason, with sessions traceable to an individual.
 
-A control only counts if someone acted on it.
+Try this today: pick one access anomaly and trace it from detection to outcome. If you get stuck, so will your assessor.
 
-And it's not just people. A service account that can log in needs a reason, and a trail back to a named individual.
+[Camera]
+With Teleport, you don’t have to piece that trail together by hand. 
 
-So try this today. Pick one access anomaly, and trace it from detection to outcome. If you get stuck, so will your assessor.
+It records identity, access and session activity across infrastructure supporting your cardholder data environment. Scoped roles and short-lived credentials limit access and sessions link activity to a person, service account or agent.
 
-Teleport gives you one identity and access record across your cardholder data environment. Short-lived credentials and scoped roles mean access doesn't linger. And every session traces back to a person, service account or agent.
-
-So you're not rebuilding the trail by hand.
+When the assessor asks, the trail is already there. Read the blog for details.
 
 ## Notes
 - The scenario is the blog's own: a user elevates to an admin role and reaches a production database, with no record of why, who approved it, or whether anyone reviewed it.

@@ -1,35 +1,35 @@
-# 046 · Your Agent Doesn't Know Who "I" Is
+# 046 · Your Agent Doesn't Know Who's Asking
 
 _Campaign: AI builders. Blog: https://goteleport.com/blog/your-ai-agent-needs-to-know-who-you-are/. Format: screen share with graphics. End card: Teleport logo + goteleport.com/use-cases/ai-builders._
 
 ## Script
 
-Ask your AI agent: what have I been working on?
+Dan and Bart both ask an AI agent the same thing: show me my customers.
 
-It has no idea who "I" is.
+They get exactly the same list. Every customer in the company.
 
-The tool behind it sees the agent, not you. So it returns nothing, everyone's data, or asks for an email anyone could fake.
+That's because the system never sees Dan or Bart. It only sees the agent, so it can't tell who's asking. It returns everything.
 
-And your audit log just says a tool ran at 2:34.
+And your audit log just says a tool ran at 2:34. Not who asked.
 
-Don't build a new user database. Use the identity you've already got.
+The fix is to pass the person's identity through to the tool.
 
-With Teleport, you log in through your existing SSO, and every tool call carries a short-lived, signed token. The tool checks it, and knows it's you. The token's locked to one gateway, and it expires, typically within the hour.
+With Teleport, you sign in once with your company login. Every tool call then carries a short-lived, signed token saying who you are and what your role allows. The tool checks it, and only returns what that person is allowed to see.
 
-Now Alice sees her orders, and an admin sees them all. You change permissions in Teleport, not in tool code.
+Now the same question gets different answers. Dan sees his customers. Bart sees his, even though the agent made the request.
 
-And your log says Alice updated order 42.
-
-And when Alice leaves, her access to servers, databases and AI tools goes at once.
+The log now says Dan asked, at 2:34.
+ 
+And when Dan leaves, his access to servers, databases and AI tools goes at once. Check out Teleport's blog for details
 
 ## Notes
-- The blog's lines: "When your AI agent calls an MCP tool, that tool has no idea who actually triggered the request. It sees the agent, not you."
-- The three failure modes are the blog's own: the tool "returns nothing, returns everything (leaking data across users), or requires the user to manually pass their own email as an argument, which any user could fake."
-- This is the general version of the idea, for any MCP tool. 044 is the AWS-specific version, so don't run them back to back in the same campaign without varying the Alice example.
-- The audit log before and after, from the blog: "`update_order_tool` executed at 2:34 PM." becomes "2:34 PM - User alice@goteleport.com updated order #42 to 'shipped'".
+- The example comes from the blog, where Dan asks the agent to "list all of her customers from the sales database" and should see only her own data, while Bart needs broader team access. 044 also uses Dan and Bart, so if both run in the same campaign, space them apart or change the names in one.
+- The blog's core line: "When your AI agent calls an MCP tool, that tool has no idea who actually triggered the request. It sees the agent, not you."
+- "It returns everything" is one of the blog's three failure modes: the tool "returns nothing, returns everything (leaking data across users), or requires the user to manually pass their own email as an argument, which any user could fake." The script uses only the leak because it's the easiest to picture.
+- The audit log before and after, from the blog: "`update_order_tool` executed at 2:34 PM." becomes "2:34 PM - User Dan@goteleport.com updated order #42 to 'shipped'".
+- The filtering happens in the tool: once it knows who's asking from the token, it scopes the query to that person, and anyone with an admin role sees everything. In the blog this is `get_order_tool`, with the `order-admin` role. Permissions are changed in Teleport roles, not in tool code.
 - The flow: `tsh login`, then `tsh mcp connect`. The JWT is attached as a Bearer token on every call. The MCP server checks signature, audience, expiry and roles against Teleport's public keys. The blog says "No user database is needed on the MCP side."
 - The token: `sub` (who), `roles` (what they can do), `aud` (locks it to one MCP gateway so it can't be replayed elsewhere) and `exp` (typically one hour).
-- Once a tool knows who's asking, it can filter by person: an admin sees any order, and everyone else sees only their own. Changing permissions happens in Teleport, not in tool code.
 - "Goes at once" is the blog's claim: "When someone leaves the company, their access to servers, databases, and AI tools is revoked simultaneously."
 - There's working code in the `gravitational/rev-tech` GitHub repo. It's a good pinned comment for a technical audience.
 
@@ -37,26 +37,24 @@ And when Alice leaves, her access to servers, databases and AI tools goes at onc
 
 | Timestamp | Visual |
 |-----------|--------|
-| "what have I been working on?" | Chat window, the question being typed |
-| "no idea who "I" is" | Zoom on the word "I", which turns into a question mark |
-| "sees the agent, not you" | Person hands a request to a robot. The tool only sees the robot, and the person fades out |
-| "returns nothing" | Tool result: `[]` |
-| "or everyone's data" | Result floods with other people's rows, in red |
-| "an email anyone could fake" | Form field: someone types `ceo@company.com`, and it's accepted |
-| "a tool ran at 2:34" | Log line: `update_order_tool executed at 2:34 PM` |
-| "a new user database" | A fresh database icon appears, and gets crossed out |
-| "the identity you've already got" | Your existing SSO login screen |
-| "every tool call carries a short-lived, signed token" | Token attached to each request as it leaves, with a small countdown |
-| "The tool checks it" | Tool inspects the signature: ✓ signature, ✓ audience, ✓ expiry, ✓ roles |
-| "knows it's you" | Tool's display changes from "agent" to "Alice" |
-| "locked to one gateway" | Token tries a second gateway and bounces off. Its countdown keeps running |
-| "Alice sees her orders, and an admin sees them all" | Split screen: Alice's list shows three orders, the admin's shows hundreds |
-| "in Teleport, not in tool code" | A role card changes. The tool's code stays untouched |
-| "Alice updated order 42" | Log line rewrites itself: `User alice updated order #42 to 'shipped'` |
-| "when Alice leaves" | Alice's account switched off in SSO. Server, database and AI tool icons all lock at the same moment |
+| "Dan and Bart both ask your AI agent" | Split screen, two chat windows with name badges, both typing "Show me my customers" |
+| "exactly the same list" | Both windows fill with an identical, very long customer list |
+| "Every customer in the company" | The list keeps scrolling. Counter in the corner: 4,812 customers |
+| "never sees Dan or Bart. It only sees the agent" | Dan and Bart hand their requests to one robot. The tool only sees the robot, and the two people fade out |
+| "can't tell who's asking" | Tool squints at the robot. Speech bubble: "Who is this for?" |
+| "a tool ran at 2:34. Not who asked." | Log line: `list_customers executed at 2:34 PM`, with a blank where a name should be |
+| "pass the person's identity through" | A name badge travels along the chain: person → agent → tool |
+| "sign in once with your company login" | Your existing SSO login screen, Dan signing in |
+| "a short-lived, signed token" | Token card opens: `sub: Dan`, `roles: sales`, `exp: 1h` |
+| "only returns what that person is allowed to see" | Tool reads the badge. The long list shrinks to Dan's rows |
+| "the same question gets different answers" | Back to the split screen, same question in both windows |
+| "Dan sees her customers. Bart sees his." | Dan's window shows 12 customers, Bart's shows 9, no overlap |
+| "A manager sees the whole team" | Third window appears with both lists combined |
+| "The log says Dan asked" | Log line fills in: `User Dan listed customers at 2:34 PM` |
+| "when Dan leaves" | Dan's account switched off in SSO. Server, database and AI tool icons all lock at the same moment |
 | End card | Teleport logo + goteleport.com/use-cases/ai-builders |
 
 ## Meme Opportunity
-- "I am you" / "No, I am you" Spider-Man meme, with the agent and the user
+- Two Spider-Men pointing at each other, both labelled "the agent"
 - Tool on the phone to the agent: "And who's asking?" / agent: "A friend"
 - Blank name badge: "Hello, my name is `agent`"

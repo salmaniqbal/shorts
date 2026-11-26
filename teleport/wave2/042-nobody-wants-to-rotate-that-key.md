@@ -4,21 +4,23 @@ _Campaign: Digital payments and banking. Blog: https://goteleport.com/blog/certi
 
 ## Script
 
-Nobody on your payments team wants to rotate that key.
+Nobody on your team wants to rotate that long-lived credential.
 
-Because nobody knows what depends on it.
+ 
 
 You can push a new key to thousands of hosts. But you can't see which pipeline or cron job still needs the old one. Miss one, and you've caused an outage. In payments, there's no room for that.
 
+[Face]
 So the key stays, and it keeps working.
 
 The fix isn't better rotation. It's having nothing to rotate.
 
 Teleport replaces static keys with short-lived certificates. Engineers get theirs through SSO. Pipelines get their own machine identity. And they expire on their own.
 
-Every connection gets four checks. Did your certificate authority sign it? Has it expired? Do its roles allow this? Does the client hold the private key? Fail one, and it's refused.
+Every connection gets four checks. Did your certificate authority sign it? Has it expired? Do its roles allow this? Does the client hold the private key? Fail one, and access is denied.
 
-So a compromised build server is left holding an expired certificate. And nobody has to rotate a thing.
+[Face]c
+If a build server is compromised, its short-lived certificate soon expires, so the access doesn’t last and nobody has to rotate a thing.
 
 ## Notes
 - From the blog: keys live in `authorized_keys` files, build-server environment variables and sometimes container images. Config management can push a new key quickly, but it can't reveal what depends on the old one.
